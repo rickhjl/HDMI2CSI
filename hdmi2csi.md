@@ -37,4 +37,5 @@ Currently, only branch `l4t-r28.1` is available:
 
 Deprecated: [hdmi2cs/l4t-r23-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1), [hdmi2cs/l4t-r23-1-dev-4K](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1-dev-4K), [hdmi2cs/l4t-r24-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-1), [hdmi2cs/l4t-r24-2.1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-2.1) 
 
-
+## Compiling the kernel and drivers
+Users with knowledge of Linux may want to compile the kernel from our sources. More information about compiling the kernel are available at [[Custom Kernel Compilation|customKernelCompilation]].

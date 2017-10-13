@@ -20,5 +20,9 @@ More information about the hardware as well as contact information for ordering 
 
 Fig. 1:  The HDMI2CSI Board attached to the [Nvidia TX1 Evaluation Board](http://www.nvidia.com/object/jetson-tx1-dev-kit.html)
 
+## Drivers
+The drivers to use the HDMI2CSI board are available in the https://github.com/InES-HPMM/linux-l4t/ repository. The OS is [Linux4Tegra](https://developer.nvidia.com/embedded/linux-tegra) from Nvidia, which is based on the Linux kernel 4.4. Compared to L4T versions 24.1 and 24.2.1, the official drivers from L4T were used (except for some minor changes).
+
+
 
 

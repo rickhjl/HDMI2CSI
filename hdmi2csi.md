@@ -23,6 +23,18 @@ Fig. 1:  The HDMI2CSI Board attached to the [Nvidia TX1 Evaluation Board](http:/
 ## Drivers
 The drivers to use the HDMI2CSI board are available in the https://github.com/InES-HPMM/linux-l4t/ repository. The OS is [Linux4Tegra](https://developer.nvidia.com/embedded/linux-tegra) from Nvidia, which is based on the Linux kernel 4.4. Compared to L4T versions 24.1 and 24.2.1, the official drivers from L4T were used (except for some minor changes).
 
+#### Features
+Our drivers from Nvidia allow capturing of HDMI sources in formats up to 2160p30 (UHD).
+In the current state, the capturing will work in most cases. But this is not production ready code! It is suitable to evaluate the capabilities of the HDMI-to-CSI bridge in a prototype phase. More complex HDMI functionality (e.g. changing resolution of the HDMI source on the fly, while plugged-in) is still not yet supported.
+If you are interested in improving the drivers and moving towards more production-ready code, contact us!
 
+The supported features vary based on the branch:
+
+| **Branch** | **L4T Version** | **Dynamic Format Resolve** | **HDMI-In Ports** | **Max. Resolution** | **Status** | **EDID** | **Audio** |
+| ---------- | --------------- | --------------- | -------------------------- | ------------------- | ---------------------- | -------- | --------- |
+| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | Yes | A and B | [2160p30](https://github.com/InES-HPMM/linux-l4t/wiki/io-modes) | Under development | Fixed. Native: 2160p30, 1080p50. Extended: 2160p30, 1080p60, 720p29.97/30, 1080p30, 1080p50, 1080p29.97/30.  | Stereo Capture on HDMI In Port B with separate cable (see [[Capturing HDMI Audio|captureHdmiAudio]]) |
+
+
+Deprecated: [hdmi2cs/l4t-r23-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1), [hdmi2cs/l4t-r23-1-dev-4K](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1-dev-4K), [hdmi2cs/l4t-r24-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-1), [hdmi2cs/l4t-r24-2.1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-2.1) 
 
 

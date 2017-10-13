@@ -32,7 +32,7 @@ The supported features vary based on the branch:
 
 | **Branch** | **L4T Version** | **Dynamic Format Resolve** | **HDMI-In Ports** | **Max. Resolution** | **Status** | **EDID** | **Audio** |
 | ---------- | --------------- | --------------- | -------------------------- | ------------------- | ---------------------- | -------- | --------- |
-| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | Yes | A and B | [2160p30](https://github.com/InES-HPMM/linux-l4t/wiki/io-modes) | Under development | Fixed. Native: 2160p30, 1080p50. Extended: 2160p30, 1080p60, 720p29.97/30, 1080p30, 1080p50, 1080p29.97/30.  | Stereo Capture on HDMI In Port B with separate cable (see [[Capturing HDMI Audio|captureHdmiAudio]] ) |
+| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | Yes | A and B | [2160p30](https://github.com/InES-HPMM/linux-l4t/wiki/io-modes) | Under development | Fixed. Native: 2160p30, 1080p50. Extended: 2160p30, 1080p60, 720p29.97/30, 1080p30, 1080p50, 1080p29.97/30.  | Untested (see [[Capturing HDMI Audio|captureHdmiAudio]] ) |
 
 
 Deprecated: [hdmi2cs/l4t-r23-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1), [hdmi2cs/l4t-r23-1-dev-4K](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1-dev-4K), [hdmi2cs/l4t-r24-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-1), [hdmi2cs/l4t-r24-2.1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-2.1) 

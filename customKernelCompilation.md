@@ -67,7 +67,7 @@ From now, the TX1 / TX2 system will boot the self-built kernel.
 The Device Tree must **NOT** be defined in `extlinux.conf` because U-Boot is modifying the Device Tree on-the-fly. If the Device Tree is defined in `extlinux.conf`, changes from U-Boot are overwritten. Instead, flash the Device Tree Blob as described below.
 
 **Preparation**:
-* Download the Driver Package
+* Download the Driver Package from Nvidia
   * [Jetson TX1 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/l4t-jetson-tx1-driver-package-28-1)
   * [Jetson TX2 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/l4t-jetson-tx2-driver-package-28-1)
 * Unpack and change to downloaded Folder: `$ cd Linux_for_Tegra`

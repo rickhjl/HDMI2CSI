@@ -63,3 +63,19 @@ LABEL hdmi2csi_28_1
 From now, the TX1 / TX2 system will boot the self-built kernel. 
 
 ### Device Tree
+
+The Device Tree must **NOT** be defined in `extlinux.conf` because U-Boot is modifying the Device Tree on-the-fly. If the Device Tree is defined in `extlinux.conf`, changes from U-Boot are overwritten. Instead, flash the Device Tree Blob as described below.
+
+**Preparation**:
+* Download the Driver Package
+  * [Jetson TX1 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/l4t-jetson-tx1-driver-package-28-1)
+  * [Jetson TX2 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/l4t-jetson-tx2-driver-package-28-1)
+* Unpack and change to downloaded Folder: `$ cd Linux_for_Tegra`
+* Replace the existing Device Tree
+  * TX1: `$ cp MY_KERNEL_DIR/kernel/kernel-4.4/arch/arm64/boot/dts/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/hardware/nvidia/platform/t210/jetson/kernel-dts/tegra210-jetson-tx1-p2597-2180-a01-devkit-hdmi2csi.dtb kernel/dtb/tegra210-jetson-tx1-p2597-2180-a01-devkit.dtb`
+  * TX2: `$ cp MY_KERNEL_DIR/kernel/kernel-4.4/arch/arm64/boot/dts/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/hardware/nvidia/platform/t18x/quill/kernel-dts/tegra186-quill-p3310-1000-c03-00-base-hdmi2csi.dtb kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb`
+* Flash Device Tree Blob
+  * TX1: `$ sudo ./flash.sh -r -k DTB jetson-tx1 mmcblk0p1`
+  * TX2: `$ sudo ./flash.sh -r -k kernel-dtb jetson-tx2 mmcblk0p1`
+
+

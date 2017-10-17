@@ -6,7 +6,7 @@ It is necessary to replace the Kernel, Modules and device tree with those from t
 
 Create the kernel config file for the HDMI2CSI module:
 * **TX1**: `make tegra21_hdmi2csi_defconfig`
-* **TX2**: `make tegra21_defconfig` **Note**: HDMI2CSI not supported, yet
+* **TX2**: `make tegra18_hdmi2csi_defconfig`
 
 
 A good Wiki for compiling TX1 / TX2 source code (Linux4Tegra) is available at:
@@ -18,7 +18,7 @@ In the end the following files need to be built:
 * Kernel modules (`make modules`) **Note**: The TC358840 driver is new included in the Linux kernel
 * Device Tree Blob (`make dtbs`)
   * TX1: tegra210-jetson-tx1-p2597-2180-a01-devkit-hdmi2csi.dtb
-  * TX2: tegra186-quill-p3310-1000-c03-00-base.dtb
+  * TX2: tegra186-quill-p3310-1000-c03-00-base-hdmi2csi.dtb
 
 #### Replace / Install new kernel files
 After building is complete, the Kernel image, modules and device tree blob need to be replaced on the TX1 / TX2. The easiest way is to connect the Jetson to the host development PC via micro-USB. This requires: a micro-USB connection to the PC and a serial console to connect to J21 (example: http://elinux.org/Jetson/TX1_Serial_Console) for interfacing with U-Boot.

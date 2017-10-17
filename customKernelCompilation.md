@@ -74,6 +74,15 @@ The Device Tree must **NOT** be defined in `extlinux.conf` because U-Boot is mod
 * Replace the existing Device Tree
   * TX1: `$ cp MY_KERNEL_DIR/kernel/kernel-4.4/arch/arm64/boot/dts/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/hardware/nvidia/platform/t210/jetson/kernel-dts/tegra210-jetson-tx1-p2597-2180-a01-devkit-hdmi2csi.dtb kernel/dtb/tegra210-jetson-tx1-p2597-2180-a01-devkit.dtb`
   * TX2: `$ cp MY_KERNEL_DIR/kernel/kernel-4.4/arch/arm64/boot/dts/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/_ddot_/hardware/nvidia/platform/t18x/quill/kernel-dts/tegra186-quill-p3310-1000-c03-00-base-hdmi2csi.dtb kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb`
+* Put the system into _recovery mode_
+  * Turn device completely off
+    * If unsure remove power cable
+  * Connect host system to Micro USB port (J20)
+  * Hold _Recovery_ button while turning on the system
+  * Keep the _Recovery_ button pressed
+  * Reset the system by pressing the _Reset_ button while keep pushing the _Recovery_ button
+  * Release the _Recovery_ button after approx 2 s
+  * `$ lsusb` on the host system should show `Nvidia Corp.`
 * Flash Device Tree Blob
   * TX1: `$ sudo ./flash.sh -r -k DTB jetson-tx1 mmcblk0p1`
   * TX2: `$ sudo ./flash.sh -r -k kernel-dtb jetson-tx2 mmcblk0p1`

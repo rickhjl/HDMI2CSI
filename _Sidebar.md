@@ -8,7 +8,7 @@
 * [Overview HDMI2CSI Module](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi)
 * [Custom GStreamer](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/CustomGStreamer)
 * [Audio Support](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio)
-* [Examples](https://github.com/InES-HPMM/linux-l4t/wiki/hdmi2csi#examples)
+* [Examples](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#examples)
 
 ----
 #### Hardware

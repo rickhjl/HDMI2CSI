@@ -39,3 +39,67 @@ Deprecated: [hdmi2cs/l4t-r23-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi
 
 ## Compiling the kernel and drivers
 Users with knowledge of Linux may want to compile the kernel from our sources. More information about compiling the kernel are available at [[Custom Kernel Compilation|customKernelCompilation]].
+
+## Examples
+Note that the `device=` parameter of v4l2src for 
+* `/dev/video0` selects HDMI-In A  (maximum resolution 2160p30)
+* `/dev/video1` selects HDMI-In B  (maximum resolution 1080p60) **NOTE**: Changed from `video2` to `video1` compared to L4T r24.2.1
+
+### GStreamer
+Some of these pipelines may require GStreamer plugins that are only available in the custom built GStreamer 1.8.0. Therefore it is necessary to switch to it by changing environment variables:
+```
+export DISPLAY=:0; export LD_LIBRARY_PATH=/home/ubuntu/build/gst_1.8.0/out/lib/; export PATH=/home/ubuntu/build/gst_1.8.0/out/bin/:$PATH; export GST_PLUGIN_PATH=$LD_LIBRARY_PATH
+```
+More information about how to build GStreamer can be found in the [Custom GStreamer](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/CustomGStreamer) section.
+
+#### Capturing and Rendering
+* Capture 2160p30 on HDMI-In A and render on HDMI Display
+  * `gst-launch-1.0 v4l2src device=/dev/video0 ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), width=3840, height=2160, framerate=30/1, format=I420' ! nvoverlaysink sync=false`
+* Capture 1080p60 on HDMI-In B and render on HDMI Display
+  * `gst-launch-1.0 v4l2src device=/dev/video1 ! 'video/x-raw, width=1920, height=1080, framerate=60/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), width=1920, height=1080, framerate=60/1, format=I420' ! nvoverlaysink sync=false`
+* *Userptr* mode for buffer passing for improved performance (requires modifications to GStreamer)
+  * `gst-launch-1.0 v4l2src io-mode=3 device=/dev/video0 do-timestamp=true ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! xvimagesink sync=false`
+* *Dmabuf* mode for buffer passing for improved performance (requires modifications to GStreamer)
+  * `gst-launch-1.0 v4l2src io-mode=4 device=/dev/video0 do-timestamp=true ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! xvimagesink sync=false`
+
+#### Video Processing on GPU
+* Use GPU plugin for video processing `nvivafilter`
+  * `gst-launch-1.0 v4l2src device=/dev/video0 ! 'video/x-raw, width=3840, height=2160, format=UYVY, framerate=30/1' ! nvvidconv ! 'video/x-raw(memory:NVMM), width=3840, height=2160, format=NV12' ! nvtee ! nvivafilter cuda-process=true pre-process=true post-process=true customer-lib-name="libnvsample_cudaprocess.so" ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nvoverlaysink display-id=0 -e`
+
+#### Streaming
+##### H.265 Encode and Send on TX1, receive on PC with VLC
+* Install GStreamer bad plugins: `$ sudo apt install gstreamer1.0-plugins-bad`
+* Stream RTP (H.265 encoded) of Input HDMI-A on TX1 <- warning: H.265 encoder has some problems with 2160p30
+  * `gst-launch-1.0 v4l2src ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=I420' ! queue ! omxh265enc bitrate=2000000 ! 'video/x-h265, stream-format=(string)byte-stream' ! h265parse ! mpegtsmux ! rtpmp2tpay ! udpsink port=5000 async=false sync=false host=192.168.0.1`
+  * Change `host=...` to the IP of the receiver
+* On the receiver create a file `mpeg_ts.sdp` and open it with VLC:
+```
+v=0
+m=video 5000 RTP/AVP 33
+c=IN IP4 192.168.0.2
+a=rtpmap:33 MP2T/90000
+```
+
+
+
+
+
+
+
+
+
+
+
+##### H.264 Encode and Send on TX1, receive on PC with GStreamer
+* Stream RTP (H.264 encoded) Input of HDMI-B on TX1
+  * `gst-launch-1.0 v4l2src device=/dev/video2 ! 'video/x-raw, width=1920, height=1080, framerate=60/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=I420' ! queue ! omxh264enc bitrate=20000000 ! 'video/x-h264, stream-format=(string)byte-stream' ! h264parse ! mpegtsmux ! rtpmp2tpay ! udpsink port=5000 async=false sync=false host=192.168.0.1`
+  * Change `host=...` to the IP of the receiver
+  * Encoding bitrate may need to be adjusted, based on video content
+* And receive it on a host PC with GStreamer: (or with VLC, as described above)
+```
+gst-launch-1.0 udpsrc port=5000 caps="application/x-rtp,media=(string)video,clock-rate=(int)90000,encoding-name=(string)MP2T-ES" ! rtpbin ! rtpmp2tdepay ! tsdemux ! h264parse ! avdec_h264 ! videoconvert ! xvimagesink sync=false -vvv -e
+```
+
+#### Recording
+* Save to disk (H.264 encoded)
+  * `gst-launch-1.0 v4l2src ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=I420' ! queue ! omxh264enc bitrate=8000000 ! h264parse ! matroskamux ! filesink location=test_4k_h264.mkv -e`

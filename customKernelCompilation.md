@@ -84,7 +84,7 @@ The Device Tree must **NOT** be defined in `extlinux.conf` because U-Boot is mod
   * Release the _Recovery_ button after approx 2 s
   * `$ lsusb` on the host system should show `NVidia Corp.`
 * Flash Device Tree Blob
-  * TX1: `$ sudo ./flash.sh -r -k DTB jetson-tx1 mmcblk0p1`
-  * TX2: `$ sudo ./flash.sh -r -k kernel-dtb jetson-tx2 mmcblk0p1`
+  * TX1: `$ sudo ./flash.sh -k DTB jetson-tx1 mmcblk0p1`
+  * TX2: `$ sudo ./flash.sh -k kernel-dtb jetson-tx2 mmcblk0p1`
 
 

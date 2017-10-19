@@ -1,7 +1,7 @@
 # The HDMI2CSI module
 
 ##### Quicklinks
-* [HDMI2CSI for previous L4T v24.2.1](https://github.com/InES-HPMM/linux-l4t/wiki/hdmi2csi/)
+* [HDMI2CSI for previous L4T v24.2.1 (Deprecated)](https://github.com/InES-HPMM/linux-l4t/wiki/hdmi2csi/)
 * [Drivers](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#drivers)
 * [Compiling (or use our prebuilt image)](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#compiling-the-kernel-and-drivers)
 * [Examples](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#examples)

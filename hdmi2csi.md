@@ -5,6 +5,7 @@
 * [Drivers](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#drivers)
 * [Compiling (or use our prebuilt image)](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#compiling-the-kernel-and-drivers)
 * [Examples](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#examples)
+* [Changing the EDID](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#changing-the-edid)
 
 ----
 
@@ -28,9 +29,9 @@ If you are interested in improving the drivers and moving towards more productio
 
 Currently, only branch `l4t-r28.1` is available:
 
-| **Branch** | **L4T Version** | **Dynamic Format Resolve** | **HDMI-In Ports** | **Max. Resolution** | **Status** | **EDID** | **Audio** |
-| ---------- | --------------- | --------------- | -------------------------- | ------------------- | ---------------------- | -------- | -------------- |
-| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | Yes | A and B | [2160p30](https://github.com/InES-HPMM/linux-l4t/wiki/io-modes) | TX1: OK, TX2: OK | Fixed. Native: 2160p30, 1080p50. Extended: 2160p30, 1080p60, 720p29.97/30, 1080p30, 1080p50, 1080p29.97/30.  | Untested (see [Capturing HDMI Audio](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio) ) |
+| **Branch** | **L4T Version** | **HDMI-In Ports** | **Resolution** | **Status** | **Audio** |
+| ---------- | --------------- | -------------------------- | ------------------- | -------- | -------------- |
+| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | A and B | Max. 2160p30 on A, Max. 1080p60 on B. Details: [EDID](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#changing-the-edid) | TX1: OK, TX2: OK | Untested (see [Capturing HDMI Audio](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio) ) |
 
 
 Deprecated: [hdmi2cs/l4t-r23-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1), [hdmi2cs/l4t-r23-1-dev-4K](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r23-1-dev-4K), [hdmi2cs/l4t-r24-1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-1), [hdmi2cs/l4t-r24-2.1](https://github.com/InES-HPMM/linux-l4t/tree/hdmi2csi/l4t-r24-2.1) 
@@ -92,3 +93,47 @@ gst-launch-1.0 udpsrc port=5000 caps="application/x-rtp,media=(string)video,cloc
 #### Recording
 * Save to disk (H.264 encoded)
   * `gst-launch-1.0 v4l2src device=/dev/video0 ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=I420' ! queue ! omxh264enc bitrate=8000000 ! h264parse ! matroskamux ! filesink location=test_4k_h264.mkv -e`
+
+
+## Changing the EDID
+Each HDMI-In Port acts as a HDMI sink. Therefore each of them needs to specify the timings (resolutions) it supports to a HDMI source. This is done via the Extended Display Identification Data (EDID). A standard EDID is defined in the driver, containing the following resolutions:
+* 16:9
+  * 3840x2160p30
+  * 1920x1080p24/25/30/50/60
+  * 1280x720p30
+* 64:27 ("21:9")
+  * 1920x1080p29.97/30/60
+  * 1280x720p29.97/30
+
+If you want to support a different resolution, you can set it as described below. Currently there is an upper limit of 3840x2160p30, but any resolution "below" should be supported.
+
+#### Read out EDID
+The following command will read out the EDID from HDMI-In A and save it to a file.
+```
+$ v4l2-ctl --get-edid=pad=0,startblock=0,format=hex,file=tc358840_edid.raw
+```
+The file `tc358840_edid.raw` looks like:
+```
+00 ff ff ff ff ff ff 00 52 62 88 88 00 88 88 88
+1c 15 01 03 80 00 00 78 0a 0d c9 a0 57 47 98 27
+12 48 4c 00 00 00 01 01 01 01 01 01 01 01 01 01
+01 01 01 01 01 01 b4 66 00 a0 f0 70 1f 80 30 20
+35 00 80 88 42 00 00 1c ed 2c 80 a0 70 38 1a 40
+30 20 35 00 40 44 21 00 00 1c 00 00 00 fc 00 54
+6f 73 68 69 62 61 2d 55 48 32 43 0a 00 00 00 fd
+00 17 3d 0f 8c 1e 00 00 00 00 00 00 00 00 01 ab
+02 03 1a 74 4a 5f 10 43 3e 22 1f 20 21 4c 4a 23
+09 07 01 66 03 0c 00 30 00 80 b4 66 00 a0 f0 70
+1f 80 30 20 35 00 80 88 42 00 00 f8 00 00 1c ec
+68 00 a0 f0 70 37 80 30 20 3a 00 00 70 f8 00 00
+1c ec 68 00 a0 f0 70 37 80 30 20 3a 00 00 70 f8
+00 00 1c ec 68 00 a0 f0 70 37 80 30 20 3a 00 00
+70 f8 00 00 1c 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 db
+```
+
+#### Change the EDID
+If you want to set a new EDID, you can generate it with a program like [AnalogWay EDID Editor](http://www.analogway.com/en/products/software-and-tools/aw-edid-editor/). Save the EDID to a file (e.g. `tc358840_edid_NEW.raw`. Then apply it to HDMI-In A.
+```
+$ v4l2-ctl --set-edid=pad=0,file=tc358840_edid_NEW.raw
+```

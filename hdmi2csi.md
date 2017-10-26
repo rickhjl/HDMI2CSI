@@ -54,6 +54,8 @@ More information about how to build GStreamer can be found in the [Custom GStrea
 #### Capturing and Rendering
 * Capture 2160p30 on HDMI-In A and render on HDMI Display
   * `gst-launch-1.0 v4l2src device=/dev/video0 ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), width=3840, height=2160, framerate=30/1, format=I420' ! nvoverlaysink sync=false`
+* Use RGB instead of UYVY. **NOTE**: So far RGB is running only up to 1080p30!
+  * `DISPLAY=:0 gst-launch-1.0 v4l2src device=/dev/video0 ! 'video/x-raw, format=RGB, width=1920, height=1080, framerate=30/1' ! videoconvert ! 'video/x-raw, format=I420, width=1920, height=1080, framerate=30/1' ! xvimagesink sync=false`
 * Capture 1080p60 on HDMI-In B and render on HDMI Display
   * `gst-launch-1.0 v4l2src device=/dev/video1 ! 'video/x-raw, width=1920, height=1080, framerate=60/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), width=1920, height=1080, framerate=60/1, format=I420' ! nvoverlaysink sync=false`
 * *Userptr* mode for buffer passing for improved performance (requires modifications to GStreamer)

@@ -100,12 +100,12 @@ gst-launch-1.0 udpsrc port=5000 caps="application/x-rtp,media=(string)video,cloc
 ## Changing the EDID
 Each HDMI-In Port acts as a HDMI sink. Therefore each of them needs to specify the timings (resolutions) it supports to a HDMI source. This is done via the Extended Display Identification Data (EDID). A standard EDID is defined in the driver, containing the following resolutions:
 * 16:9
-  * 3840x2160p30
+  * 3840x2160p24/25/30
   * 1920x1080p24/25/30/50/60
-  * 1280x720p30
+  * 1280x720p24/25/30/60
 * 64:27 ("21:9")
-  * 1920x1080p29.97/30/60
-  * 1280x720p29.97/30
+  * 1920x1080p23.98/24/25/29.97/30/60
+  * 1280x720p23.98/24/25/29.94/30/59.97/60
 
 If you want to support a different resolution, you can set it as described below. Currently there is an upper limit of 3840x2160p30, but any resolution "below" should be supported.
 
@@ -139,3 +139,6 @@ If you want to set a new EDID, you can generate it with a program like [AnalogWa
 ```
 $ v4l2-ctl --set-edid=pad=0,file=tc358840_edid_NEW.raw
 ```
+
+#### Ensure that resolution / framerate is in driver
+Make sure that your desired framerate and resolution is enabled in the tc358840 driver: https://github.com/InES-HPMM/linux-l4t-4.4-kernel/blob/878fbe7ba0789f2cbc0192fa53fd9b5d37ad342a/drivers/media/i2c/tc358840_regs.h#L729

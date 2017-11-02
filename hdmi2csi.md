@@ -68,7 +68,7 @@ More information about how to build GStreamer can be found in the [Custom GStrea
   * `gst-launch-1.0 v4l2src device=/dev/video0 ! 'video/x-raw, width=3840, height=2160, format=UYVY, framerate=30/1' ! nvvidconv ! 'video/x-raw(memory:NVMM), width=3840, height=2160, format=NV12' ! nvtee ! nvivafilter cuda-process=true pre-process=true post-process=true customer-lib-name="libnvsample_cudaprocess.so" ! 'video/x-raw(memory:NVMM), format=(string)NV12' ! nvoverlaysink display-id=0 -e`
 
 #### Streaming
-##### H.265 Encode and Send on TX1, receive on PC with VLC
+##### H.265 Encode and Send on TX2, receive on PC with VLC
 * Install GStreamer bad plugins: `$ sudo apt install gstreamer1.0-plugins-bad`
 * Stream RTP (H.265 encoded) of Input HDMI-A on TX1 <- warning: H.265 encoder has some problems with 2160p30
   * `gst-launch-1.0 v4l2src ! 'video/x-raw, width=3840, height=2160, framerate=30/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=I420' ! queue ! omxh265enc bitrate=2000000 ! 'video/x-h265, stream-format=(string)byte-stream' ! h265parse ! mpegtsmux ! rtpmp2tpay ! udpsink port=5000 async=false sync=false host=192.168.0.1`
@@ -81,9 +81,16 @@ c=IN IP4 192.168.0.2
 a=rtpmap:33 MP2T/90000
 ```
 
-##### H.264 Encode and Send on TX1, receive on PC with GStreamer
+###### Receive/decode on a separate TX2 and render on HDMI display
+Instead of receiving on PC with VLC, receive on a separate TX2 with a GStreamer pipeline:
 * Install GStreamer bad plugins: `$ sudo apt install gstreamer1.0-plugins-bad`
-* Stream RTP (H.264 encoded) Input of HDMI-B on TX1
+* Connect receiver-TX2 to a HDMI display 
+* Run receiver GStreamer pipeline
+  * `gst-launch-1.0 udpsrc port=5000  ! 'video/mpegts, systemstream=(boolean)true' ! tsdemux ! h265parse ! queue ! omxh265dec ! nvoverlaysink sync=false -e`
+
+##### H.264 Encode and Send on TX2, receive on PC with GStreamer
+* Install GStreamer bad plugins: `$ sudo apt install gstreamer1.0-plugins-bad`
+* Stream RTP (H.264 encoded) Input of HDMI-B on TX2
   * `gst-launch-1.0 v4l2src device=/dev/video1 ! 'video/x-raw, width=1920, height=1080, framerate=60/1, format=UYVY' ! nvvidconv ! 'video/x-raw(memory:NVMM), format=I420' ! queue ! omxh264enc bitrate=20000000 ! 'video/x-h264, stream-format=(string)byte-stream' ! h264parse ! mpegtsmux ! rtpmp2tpay ! udpsink port=5000 async=false sync=false host=192.168.0.1`
   * Change `host=...` to the IP of the receiver
   * Encoding bitrate may need to be adjusted, based on video content

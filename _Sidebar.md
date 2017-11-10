@@ -6,6 +6,7 @@
 ----
 #### HDMI2CSI Software
 * [Overview HDMI2CSI Module](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi)
+* [Custom Kernel Compilation](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/customKernelCompilation)
 * [Custom GStreamer](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/CustomGStreamer)
 * [Audio Support](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio)
 * [Examples](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#examples)

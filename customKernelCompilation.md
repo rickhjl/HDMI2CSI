@@ -4,6 +4,15 @@ In order to run the drivers, a Jetson TX1 or TX2 development board is required. 
 
 It is necessary to replace the Kernel, Modules and device tree with those from this repository.
 
+## Pre-built Kernel Images
+The pre-built image contain the Linux kernel (`/boot/...`), the Device Tree (`/...` or `/boot/...`) and the modules (`/lib/modules/...`)
+* **TX1**: [TX1 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/HXzr1NfkEbqQWPX)
+* **TX2**: [TX2 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/d18AeSp6yi6xKG2)
+
+**Note**: See below how to flash Kernel, modules and Device Tree.
+
+## Kernel Compilation
+
 Create the kernel config file for the HDMI2CSI module:
 * **TX1**: `make tegra21_hdmi2csi_defconfig`
 * **TX2**: `make tegra18_hdmi2csi_defconfig`

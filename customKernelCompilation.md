@@ -1,6 +1,6 @@
 # Custom Kernel Compilation
 
-In order to run the drivers, a Jetson TX1 development board is required. Ensure that it is flashed with the L4T version corresponding to the branch used (28.1). You can use Jetpack or do it by hand as described in the Nvidia documentation.
+In order to run the drivers, a Jetson TX1 or TX2 development board is required. Ensure that it is flashed with the L4T version corresponding to the branch used (28.1). You can use Jetpack or do it by hand as described in the Nvidia documentation.
 
 It is necessary to replace the Kernel, Modules and device tree with those from this repository.
 

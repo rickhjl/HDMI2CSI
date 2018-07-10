@@ -12,6 +12,11 @@ The pre-built Kernel image contains the Linux Kernel (`/boot/...`), the Device T
 
 ## Kernel Compilation
 
+Set the environment variables:
+* `export ARCH=arm64`
+* `export CROSS_COMPILE=<aarch64_toolchain_prefix>`    
+(e.g. `export CROSS_COMPILE=/opt/gcc4.8.5/install/bin/aarch64-unknown-linux-gnu-`)
+
 Create the kernel config file for the HDMI2CSI module:
 * **TX1**: `make tegra21_hdmi2csi_defconfig`
 * **TX2**: `make tegra18_hdmi2csi_defconfig`

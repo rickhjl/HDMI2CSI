@@ -7,11 +7,11 @@ It is necessary to replace the Kernel, Modules and device tree with those from t
 ## Pre-built Kernel Images
 The pre-built Kernel image contains the Linux Kernel (`/boot/...`), the Device Tree (`/...` or `/boot/...`) and the modules (`/lib/modules/...`). Note that flashing the device is still necessary.
 
-For 28.2.1 branch:
+For 28.1 branch:
 * [TX1 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/HXzr1NfkEbqQWPX)
 * [TX2 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/d18AeSp6yi6xKG2)
 
-For 28.1 branch:
+For 28.2.1 branch:
 * Not available yet
 
 ## Kernel Compilation

@@ -90,7 +90,7 @@ The Device Tree must **NOT** be defined in `extlinux.conf` because U-Boot is mod
     * [Jetson TX1 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/l4t-jetson-tx1-driver-package-28-1)
     * [Jetson TX2 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/l4t-jetson-tx2-driver-package-28-1)
   * For 28.2.1
-    * **Jetson TX1 64-bit Driver Package:** Not available from Nvidia
+    * _Jetson TX1 64-bit Driver Package: Not available from Nvidia_
     * [Jetson TX2 64-bit Driver Package](https://developer.nvidia.com/embedded/dlc/tx2-driver-package-r2821)
 * Unpack and change to downloaded Folder: `$ cd Linux_for_Tegra`
 * Replace the existing Device Tree

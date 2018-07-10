@@ -31,8 +31,9 @@ Currently, only branch `l4t-r28.1` is available:
 
 | **Branch** | **L4T Version** | **HDMI-In Ports** | **Resolution** | **Status** | **Audio** |
 | ---------- | --------------- | -------------------------- | ------------------- | -------- | -------------- |
-| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | A and B | Max. 2160p30 on A, Max. 1080p60 on B. Details: [EDID](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#changing-the-edid) | TX1: OK, TX2: OK | Untested (see [Capturing HDMI Audio](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio) ) |
 | **[hdmi2csi/l4t-r28.2.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.2.1)** | R28.2.1 | A and B | Max. 2160p30 on A, Max. 1080p60 on B. Details: [EDID](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#changing-the-edid) | TX1: Untested, TX2: OK | Untested (see [Capturing HDMI Audio](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio) ) |
+| **[hdmi2csi/l4t-r28.1](https://github.com/InES-HPMM/linux-l4t-4.4/tree/hdmi2csi/l4t-r28.1)** | R28.1 | A and B | Max. 2160p30 on A, Max. 1080p60 on B. Details: [EDID](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/hdmi2csi#changing-the-edid) | TX1: OK, TX2: OK | Untested (see [Capturing HDMI Audio](https://github.com/InES-HPMM/linux-l4t-4.4/wiki/captureHdmiAudio) ) |
+
 
 
 

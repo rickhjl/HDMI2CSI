@@ -27,7 +27,6 @@ Our drivers from Nvidia allow capturing of HDMI sources in formats up to 2160p30
 In the current state, the capturing will work in most cases. But this is not production ready code! It is suitable to evaluate the capabilities of the HDMI-to-CSI bridge in a prototype phase. More complex HDMI functionality (e.g. changing resolution of the HDMI source on the fly, while plugged-in) is still not yet supported.
 If you are interested in improving the drivers and moving towards more production-ready code, contact us!
 
-Currently, only branch `l4t-r28.1` is available:
 
 | **Branch** | **L4T Version** | **HDMI-In Ports** | **Resolution** | **Status** | **Audio** |
 | ---------- | --------------- | -------------------------- | ------------------- | -------- | -------------- |

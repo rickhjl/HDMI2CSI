@@ -16,6 +16,9 @@ For 28.2.1 branch:
 
 ## Kernel Compilation
 
+Go to the kernel-4.4 directory:
+* `cd kernel/kernel-4.4`
+
 Set the environment variables:
 * `export ARCH=arm64`
 * `export CROSS_COMPILE=<aarch64_toolchain_prefix>`    

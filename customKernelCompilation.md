@@ -10,6 +10,7 @@ The pre-built Kernel image contains the Linux Kernel (`/boot/...`), the Device T
 For 28.1 branch:
 * [TX1 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/HXzr1NfkEbqQWPX)
 * [TX2 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/d18AeSp6yi6xKG2)
+
 For 28.1 branch:
 * Not available yet
 

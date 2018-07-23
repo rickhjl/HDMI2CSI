@@ -12,7 +12,8 @@ For 28.1 branch:
 * [TX2 Kernel (g878fbe7)](https://drive.switch.ch/index.php/s/d18AeSp6yi6xKG2)
 
 For 28.2.1 branch:
-* Not available yet
+* TX1 Kernel: Not available
+* [TX2 Kernel (gf64be34)](https://github.com/InES-HPMM/linux-l4t-4.4/releases/download/l4t-r28.2.1-v2/l4t_r28_2_1_v2_kernel_tx2_gf64be34.tar.gz)
 
 ## Kernel Compilation
 
